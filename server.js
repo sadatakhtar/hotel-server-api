@@ -1,4 +1,4 @@
-
+//Hotel server API
 const express = require("express");
 const app = express();
 const cors = require('cors');
