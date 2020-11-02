@@ -60,7 +60,13 @@ app.post('/bookings', (req, res) => {
     !newPost.id || !newPost.roomId || !newPost.title || !newPost.firstName || !newPost.surname || !newPost.email || !newPost.checkInDate || !newPost.checkOutDate ? res.sendStatus(400) : (bookings.push(newPost),res.json(bookings));
   
     //newPost ? (bookings.push(newPost),res.json(bookings)) : res.sendStatus(404);
-    
+});
+
+app.get("/bookings/search", (req, res) => {
+    const dateQ = req.query.date;
+
+     let filteredBookings = bookings.filter(e => e.checkInDate.includes(dateQ));
+     !dateQ || dateQ.length === 0 ? res.sendStatus(404) : (res.json(filteredBookings));
 });
 
 app.get('/bookings/:id', (req, res) => {
