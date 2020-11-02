@@ -63,6 +63,14 @@ app.post('/bookings', (req, res) => {
     
 });
 
+app.get("/bookings/search", (req, res) => {
+    const dateQ = req.query.date;
+
+     let filteredBookings = bookings.filter(e => e.checkInDate.includes(dateQ));
+     !dateQ || dateQ.length === 0 ? res.sendStatus(404) : (res.json(filteredBookings));
+});
+
+
 app.get('/bookings/:id', (req, res) => {
     let {id} = req.params;
     let filteredBooking = bookings.find(e => e.id == id);
@@ -75,6 +83,6 @@ app.delete("/bookings/:id", (req, res) => {
     id > bookings.length || !id ? res.send(404) : (bookings = bookings.filter(e => e.id != id), res.json(bookings));
 });
 // listen for requests :)
-const listener = app.listen(process.env.PORT, () => {
+const listener = app.listen(process.env.PORT || 3000, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
