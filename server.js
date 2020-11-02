@@ -57,7 +57,7 @@ app.get('/bookings', (req, res) => {
 app.post('/bookings', (req, res) => {
     let newPost = req.body;
     Object.keys(newPost).length === 0 && res.json({success: false});
-    !newPost.id || !newPost.roomId || !newPost.title || !newPost.firstName || !newPost.surname || !newPost.email ||? res.send("info missing") : (bookings.push(newPost),res.json(bookings));
+    !newPost.id || !newPost.roomId || !newPost.title || !newPost.firstName || !newPost.surname || !newPost.email || !newPost.checkInDate || !newPost.checkOutDate ? res.sendStatus(400) : (bookings.push(newPost),res.json(bookings));
   
     //newPost ? (bookings.push(newPost),res.json(bookings)) : res.sendStatus(404);
     
