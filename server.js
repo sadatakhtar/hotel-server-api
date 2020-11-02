@@ -1,9 +1,12 @@
 
 const express = require("express");
 const app = express();
+const cors = require('cors');
+
 
 //middleware
 app.use(express.json());
+app.use(cors());
 
 //create temp database for hotel
 let bookings = [
@@ -67,7 +70,7 @@ app.get('/bookings/:id', (req, res) => {
 
 app.delete("/bookings/:id", (req, res) => {
     const {id} = req.params;
-    id > bookings.length || !id ? res.send("Invalid entry!!!") : (bookings = bookings.filter(e => e.id != ))
+    id > bookings.length || !id ? res.send(404) : (bookings = bookings.filter(e => e.id != id), res.json(bookings));
 });
 // listen for requests :)
 const listener = app.listen(process.env.PORT, () => {
