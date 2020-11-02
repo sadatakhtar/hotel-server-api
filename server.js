@@ -81,6 +81,6 @@ app.delete("/bookings/:id", (req, res) => {
     id > bookings.length || !id ? res.send(404) : (bookings = bookings.filter(e => e.id != id), res.json(bookings));
 });
 // listen for requests :)
-const listener = app.listen(process.env.PORT, () => {
+const listener = app.listen(process.env.PORT || 3000, () => {
   console.log("Your app is listening on port " + listener.address().port);
 });
